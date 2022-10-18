@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { rules, schema as Schema, validator } from '@ioc:Adonis/Core/Validator'
+import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
+import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
 import { read } from 'nmr-load-save'
 import { FileCollection, FileCollectionItem } from 'filelist-utils'
@@ -28,7 +29,12 @@ export default class SpectraController {
     return Promise.all(fetches)
   }
 
-  private generateNMRiumURL(baseURL = 'https://nmriumdev.nmrxiv.org') {
+  private generateNMRiumURL() {
+    const baseURL =
+      Env.get('NODE_ENV') === 'development'
+        ? 'https://nmriumdev.nmrxiv.org'
+        : 'https://nmrium.nmrxiv.org/'
+
     const url = new URL(baseURL)
     const preferences = JSON.stringify({
       general: {
