@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 
 test.group('Spectra', () => {
-  test('should parse spectra from urls ands return their snapshots', async ({ client }) => {
+  test('should parse spectra from URLs and return their snapshots', async ({ client }) => {
     const response = await client.post('/spectra-parser').json({
       urls: [
         'https://cheminfo.github.io/bruker-data-test/data/zipped/aspirin-1h.zip',
