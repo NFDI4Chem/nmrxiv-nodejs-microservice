@@ -30,14 +30,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: 'Create .env file'
-        if: github.ref == 'refs/heads/development'
         run: |
           touch .env
-          cp .env.dev .env
-        if: github.ref == 'refs/heads/main'
-        run: |
-          touch .env
-          cp .env.prod .env
+          cp .env.example .env
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
