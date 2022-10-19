@@ -15,7 +15,7 @@ env:
   IMAGE: nmrxiv-nodejs-microservice
 
 jobs:
-  build:
+  build and test:
 
     runs-on: ubuntu-latest
 
@@ -30,9 +30,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: 'Create .env file'
+        if: github.ref == 'refs/heads/development'
         run: |
           touch .env
-          cp .env.example .env
+          cp .env.dev .env
+        if: github.ref == 'refs/heads/main'
+        run: |
+          touch .env
+          cp .env.prod .env
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
