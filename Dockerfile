@@ -12,7 +12,7 @@ COPY --chown=node:node ./package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
 
-RUN sudo npx playwright install --with-deps
+RUN npx playwright install-deps --dry-run --with-deps
 
 FROM dependencies AS build
 RUN node ace build --production
