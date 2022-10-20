@@ -16,7 +16,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -35,6 +34,8 @@ jobs:
           cp .env.example .env
       - run: npm ci
       - run: npm run build --if-present
+      - name: Install Playwright
+        run: npx playwright install --with-deps
       - run: npm test
 
   setup-build-publish-deploy-dev:
