@@ -12,7 +12,9 @@ COPY --chown=node:node ./package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
 
-RUN npx playwright install-deps --dry-run
+# RUN npx playwright install-deps --dry-run
+RUN docker pull mcr.microsoft.com/playwright:bionic
+RUN docker run -it --rm --ipc=host mcr.microsoft.com/playwright:bionic /bin/bash
 
 FROM dependencies AS build
 RUN node ace build --production
