@@ -47,8 +47,8 @@ export default class SpectraController {
   }
 
   private async getSpectraViewAsBase64(spectra: any[] | undefined): Promise<SpectrumSnapshot[]> {
-    const browser = await playwright.webkit.launch()
-    const context = await browser.newContext(playwright.devices['Desktop Safari'])
+    const browser = await playwright.chromium.launch({ headless: true, args: ['--disable-gpu'] })
+    const context = await browser.newContext(playwright.devices['Desktop Chrome HiDPI'])
     const page = await context.newPage()
 
     const url = this.generateNMRiumURL()
