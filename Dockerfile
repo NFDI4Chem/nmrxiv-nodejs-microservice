@@ -12,12 +12,6 @@ COPY --chown=node:node ./package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
 
-ENV DISPLAY='{IP}:0'
-
-RUN npx playwright install-deps chromium
-RUN npx playwright install  chromium
-RUN npx playwright open https://nmrium.nmrxiv.org
-
 FROM dependencies AS build
 RUN node ace build --production
 
