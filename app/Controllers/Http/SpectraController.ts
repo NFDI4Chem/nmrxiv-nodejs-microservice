@@ -5,12 +5,51 @@ import playwright from 'playwright'
 import { read } from 'nmr-load-save'
 import { FileCollection, FileCollectionItem } from 'filelist-utils'
 import fetch from 'cross-fetch'
+import { maybeFilter, FilterOptions } from 'filelist-utils/lib/utilities/maybeFilter'
+import { maybeExpand } from 'filelist-utils/lib/utilities/maybeExpand'
+import { ExpandOptions } from 'filelist-utils/lib/ExpandOptions'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 interface SpectrumSnapshot {
   image: string
   id: string
 }
 
+export async function createFileCollectionFromFiles(
+  files: {
+    name: string
+    data: ArrayBuffer
+  }[],
+  options: FilterOptions & ExpandOptions = {}
+) {
+  let fileCollections: FileCollectionItem[] = []
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const file of files) {
+    const data: FileCollectionItem = {
+      name: file.name,
+      size: file.data.byteLength,
+      relativePath: file.name,
+      lastModified: Date.now(),
+      stream: (): ReadableStream => {
+        throw new Error('stream not yet implemented')
+      },
+      arrayBuffer: () => Promise.resolve(file.data),
+      text: () => {
+        const decoder = new TextDecoder()
+        decoder.decode(file.data)
+        return Promise.resolve(decoder.decode(file.data))
+      },
+    }
+
+    fileCollections.push(data)
+  }
+
+  fileCollections = await maybeExpand(fileCollections, options)
+  fileCollections = await maybeFilter(fileCollections, options)
+
+  return new FileCollection(fileCollections)
+}
 export default class SpectraController {
   private loadFilesFromURLs(urls: string[]): Promise<{ name: string; data: ArrayBuffer }[]> {
     const fetches = urls.map((url) =>
@@ -47,7 +86,7 @@ export default class SpectraController {
   }
 
   private async getSpectraViewAsBase64(spectra: any[] | undefined): Promise<SpectrumSnapshot[]> {
-    const browser = await playwright.chromium.launch({ headless: true, args: ['--disable-gpu'] })
+    const browser = await playwright.chromium.launch()
     const context = await browser.newContext(playwright.devices['Desktop Chrome HiDPI'])
     const page = await context.newPage()
 
@@ -75,12 +114,16 @@ export default class SpectraController {
       )
 
       // take a snapshot for the spectrum
-      const snapshot = await page.locator('#nmrSVG .container').screenshot()
+      try {
+        const snapshot = await page.locator('#nmrSVG .container').screenshot()
 
-      data.push({
-        image: snapshot.toString('base64'),
-        id: spectrum.id,
-      })
+        data.push({
+          image: snapshot.toString('base64'),
+          id: spectrum.id,
+        })
+      } catch (e) {
+        Logger.error(e)
+      }
     }
 
     await context.close()
@@ -90,23 +133,11 @@ export default class SpectraController {
   }
 
   private async praseSpectra(urls: string[]) {
-    const data = await this.loadFilesFromURLs(urls)
+    const files = await this.loadFilesFromURLs(urls)
 
-    const files: FileCollectionItem[] = data.map((file) => {
-      return {
-        name: file.name,
-        size: file.data.byteLength,
-        arrayBuffer: () => Promise.resolve(file.data),
-        relativePath: '.',
-        lastModified: Date.now(),
-        stream: (): ReadableStream => {
-          throw new Error('stream not yet implemented')
-        },
-        text: () => Promise.resolve(''),
-      }
-    })
+    const filesCollection = await createFileCollectionFromFiles(files)
 
-    return await read({ files } as FileCollection)
+    return await read(filesCollection)
   }
 
   public async index(context: HttpContextContract) {
@@ -124,10 +155,10 @@ export default class SpectraController {
       })
 
       const collections = await this.praseSpectra(urls)
-
       const images = snapshot ? await this.getSpectraViewAsBase64(collections?.spectra) : null
       response.send({ ...collections, images })
     } catch (error) {
+      Logger.error(error)
       response.status(400).send('messages' in error ? error.messages : error)
     }
   }
