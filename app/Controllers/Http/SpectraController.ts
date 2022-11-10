@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
 import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
-import { read } from 'nmr-load-save'
+import { read, CURRENT_EXPORT_VERSION } from 'nmr-load-save'
 import { FileCollection, FileCollectionItem } from 'filelist-utils'
 import fetch from 'cross-fetch'
 import { maybeFilter, FilterOptions } from 'filelist-utils/lib/utilities/maybeFilter'
@@ -156,7 +156,7 @@ export default class SpectraController {
 
       const collections = await this.praseSpectra(urls)
       const images = snapshot ? await this.getSpectraViewAsBase64(collections?.spectra) : null
-      response.send({ ...collections, images })
+      response.send({ ...collections, version: CURRENT_EXPORT_VERSION, images })
     } catch (error) {
       Logger.error(error)
       response.status(400).send('messages' in error ? error.messages : error)
