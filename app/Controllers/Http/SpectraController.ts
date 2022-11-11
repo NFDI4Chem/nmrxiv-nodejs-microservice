@@ -86,7 +86,7 @@ export default class SpectraController {
   }
 
   private async getSpectraViewAsBase64(spectra: any[] | undefined): Promise<SpectrumSnapshot[]> {
-    const browser = await playwright.chromium.launch()
+    const browser = await playwright.chromium.launch({ headless: false })
     const context = await browser.newContext(playwright.devices['Desktop Chrome HiDPI'])
     const page = await context.newPage()
 
@@ -156,7 +156,7 @@ export default class SpectraController {
 
       const collections = await this.praseSpectra(urls)
       const images = snapshot ? await this.getSpectraViewAsBase64(collections?.spectra) : null
-      response.send({ ...collections, version: CURRENT_EXPORT_VERSION, images })
+      response.send({ data: { ...collections, version: CURRENT_EXPORT_VERSION }, images })
     } catch (error) {
       Logger.error(error)
       response.status(400).send('messages' in error ? error.messages : error)

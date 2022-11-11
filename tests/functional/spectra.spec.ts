@@ -13,7 +13,10 @@ test.group('Spectra', () => {
     })
     response.assertStatus(200)
 
-    const { spectra, molecules, images } = response.body()
+    const {
+      data: { spectra, molecules },
+      images,
+    } = response.body()
     response.assert?.equal(spectra?.length, 5)
     response.assert?.equal(molecules?.length, 2)
     response.assert?.equal(images?.length, 3)
