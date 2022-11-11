@@ -1,6 +1,8 @@
 # API Service To Process Spectra from various data formats to NMRium format
 
 
+The API uses the [nmr-load-save](https://github.com/cheminfo/nmr-load-save) package to process the spectra and [playwright](https://playwright.dev/) to load the NMRium from the deployed wrapper [nmrium-react-wrapper](https://github.com/NFDI4Chem/nmrium-react-wrapper) and import the generated data to get the snapshots.
+ 
 ## Secptra processing 
 
 Process and convert various data formats (from various manufacturers, JCAMP standard files, or NMReDATA format, Bruker) to NMRium format
