@@ -86,7 +86,7 @@ export default class SpectraController {
   }
 
   private async getSpectraViewAsBase64(spectra: any[] | undefined): Promise<SpectrumSnapshot[]> {
-    const browser = await playwright.chromium.launch({ headless: false })
+    const browser = await playwright.chromium.launch()
     const context = await browser.newContext(playwright.devices['Desktop Chrome HiDPI'])
     const page = await context.newPage()
 

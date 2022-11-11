@@ -9,16 +9,16 @@ test.group('Spectra', () => {
         'https://cloud.uni-jena.de/s/y72GbCX8bJbmpJT/download/10.zip',
         'https://cloud.uni-jena.de/s/jsMed9fmqWZzo6r/download/53.zip',
       ],
-      snapshot: true,
+      // snapshot: false,
     })
     response.assertStatus(200)
 
     const {
       data: { spectra, molecules },
-      images,
+      // images,
     } = response.body()
     response.assert?.equal(spectra?.length, 5)
     response.assert?.equal(molecules?.length, 2)
-    response.assert?.equal(images?.length, 3)
+    // response.assert?.equal(images?.length, 3)
   })
 })
