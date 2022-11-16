@@ -37,6 +37,5 @@ The `images` attribute contains a list of the images for the spectra which is pr
   ```
 
 > **⚠ WARNING: Data Conversion.**  
-> Data should be converted from a **Typed Array** to a **Array**, without this step the NMRium will not be able to load the spectra
-> ```version``` object is important for NMRium data migration. 
+> Data should be converted from a **Typed Array** to a **Array**, without this step the NMRium will not be able to load the spectra. ```version``` object is important for NMRium data migration. 
 
