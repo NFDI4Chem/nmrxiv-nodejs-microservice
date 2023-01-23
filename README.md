@@ -29,9 +29,13 @@ POST /spectra-parser
   "images"    : {"id":string,"image":string}[]
 
 }
-
 The `spectra` attribute contains an array of spectra (1D and 2D).
 The `molecules` attribute contains an array of molecules.
 The `version` attribute contains the current version of the data which is crucial for data migration in NMRium
 The `images` attribute contains a list of the images for the spectra which is processed and displayed by NMRium,
   where each object contains two attributes the `id` is the spectrum id and an `image` as a Base64 format.
+  ```
+
+> **⚠ WARNING: Data Conversion.**  
+> Data should be converted from a **Typed Array** to a **Array**, without this step the NMRium will not be able to load the spectra. ```version``` object is important for NMRium data migration. 
+
