@@ -2,12 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
 import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
-import { read, CURRENT_EXPORT_VERSION } from 'nmr-load-save'
-import { FileCollection, FileCollectionItem } from 'filelist-utils'
-import fetch from 'cross-fetch'
-import { maybeFilter, FilterOptions } from 'filelist-utils/lib/utilities/maybeFilter'
-import { maybeExpand } from 'filelist-utils/lib/utilities/maybeExpand'
-import { ExpandOptions } from 'filelist-utils/lib/ExpandOptions'
+import { CURRENT_EXPORT_VERSION, readSource } from 'nmr-load-save'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 interface SpectrumSnapshot {
@@ -15,57 +10,29 @@ interface SpectrumSnapshot {
   id: string
 }
 
-export async function createFileCollectionFromFiles(
-  files: {
-    name: string
-    data: ArrayBuffer
-  }[],
-  options: FilterOptions & ExpandOptions = {}
-) {
-  let fileCollections: FileCollectionItem[] = []
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const file of files) {
-    const data: FileCollectionItem = {
-      name: file.name,
-      size: file.data.byteLength,
-      relativePath: file.name,
-      lastModified: Date.now(),
-      stream: (): ReadableStream => {
-        throw new Error('stream not yet implemented')
-      },
-      arrayBuffer: () => Promise.resolve(file.data),
-      text: () => {
-        const decoder = new TextDecoder()
-        decoder.decode(file.data)
-        return Promise.resolve(decoder.decode(file.data))
-      },
-    }
-
-    fileCollections.push(data)
-  }
-
-  fileCollections = await maybeExpand(fileCollections, options)
-  fileCollections = await maybeFilter(fileCollections, options)
-
-  return new FileCollection(fileCollections)
-}
 export default class SpectraController {
-  private loadFilesFromURLs(urls: string[]): Promise<{ name: string; data: ArrayBuffer }[]> {
-    const fetches = urls.map((url) =>
-      fetch(url)
-        .then((response) => response.arrayBuffer())
-        .then((data) => {
-          let name = url.substring(url.lastIndexOf('/') + 1)
-          const hasExtension = name && name.indexOf('.') !== -1
-          if (!hasExtension) {
-            name = `${name}.zip`
-          }
-          return { name, data }
-        })
-    )
-
-    return Promise.all(fetches)
+  private async loadFilesFromURLs(urls: string[]) {
+    const promises = urls.map((url) => {
+      const refURL = new URL(url)
+      let name = url.substring(url.lastIndexOf('/') + 1)
+      const hasExtension = name && name.indexOf('.') !== -1
+      if (!hasExtension) {
+        name = `${name}.zip`
+      }
+      return readSource({
+        baseURL: refURL.origin,
+        files: [{ relativePath: refURL.pathname, name }],
+      })
+    }, [])
+    const results = await Promise.all(promises)
+    const spectra: any[] = []
+    const molecules: any[] = []
+    // eslint-disable-next-line no-restricted-syntax
+    for (const result of results) {
+      spectra.push(...result.data.spectra)
+      molecules.push(...result.data.spectra)
+    }
+    return { spectra, molecules, version: CURRENT_EXPORT_VERSION }
   }
 
   private generateNMRiumURL() {
@@ -132,14 +99,6 @@ export default class SpectraController {
     return data
   }
 
-  private async praseSpectra(urls: string[]) {
-    const files = await this.loadFilesFromURLs(urls)
-
-    const filesCollection = await createFileCollectionFromFiles(files)
-
-    return await read(filesCollection)
-  }
-
   public async index(context: HttpContextContract) {
     const { response, request } = context
 
@@ -154,9 +113,9 @@ export default class SpectraController {
         schema,
       })
 
-      const collections = await this.praseSpectra(urls)
-      const images = snapshot ? await this.getSpectraViewAsBase64(collections?.spectra) : null
-      response.send({ data: { ...collections, version: CURRENT_EXPORT_VERSION }, images })
+      const data = await this.loadFilesFromURLs(urls)
+      const images = snapshot ? await this.getSpectraViewAsBase64(data?.spectra) : null
+      response.send({ data, images })
     } catch (error) {
       Logger.error(error)
       response.status(400).send('messages' in error ? error.messages : error)
