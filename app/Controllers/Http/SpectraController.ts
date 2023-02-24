@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
 import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
-import { CURRENT_EXPORT_VERSION, readSource } from 'nmr-load-save'
+import { readFromWebSource } from 'nmr-load-save'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 interface SpectrumSnapshot {
@@ -12,27 +12,16 @@ interface SpectrumSnapshot {
 
 export default class SpectraController {
   private async loadFilesFromURLs(urls: string[]) {
-    const promises = urls.map((url) => {
+    const entries = urls.map((url) => {
       const refURL = new URL(url)
       let name = url.substring(url.lastIndexOf('/') + 1)
       const hasExtension = name && name.indexOf('.') !== -1
       if (!hasExtension) {
         name = `${name}.zip`
       }
-      return readSource({
-        baseURL: refURL.origin,
-        files: [{ relativePath: refURL.pathname, name }],
-      })
+      return { relativePath: refURL.pathname, baseURL: refURL.origin }
     }, [])
-    const results = await Promise.all(promises)
-    const spectra: any[] = []
-    const molecules: any[] = []
-    // eslint-disable-next-line no-restricted-syntax
-    for (const result of results) {
-      spectra.push(...result.data.spectra)
-      molecules.push(...result.data.spectra)
-    }
-    return { spectra, molecules, version: CURRENT_EXPORT_VERSION }
+    return readFromWebSource({ entries })
   }
 
   private generateNMRiumURL() {
@@ -113,12 +102,12 @@ export default class SpectraController {
         schema,
       })
 
-      const data = await this.loadFilesFromURLs(urls)
+      const { data, version } = await this.loadFilesFromURLs(urls)
       const images = snapshot ? await this.getSpectraViewAsBase64(data?.spectra) : null
-      response.send({ data, images })
+      response.send({ data: { ...data, version }, images })
     } catch (error) {
       Logger.error(error)
-      response.status(400).send('messages' in error ? error.messages : error)
+      response.status(400).send(error)
     }
   }
 }
