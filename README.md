@@ -22,6 +22,7 @@ POST /spectra-parser
 ```javascript
 {
   "data": {
+      "source": object[],
       "spectra" : object[],
       "molecules" : object[],
       "version"    : number,
@@ -29,6 +30,7 @@ POST /spectra-parser
   "images"    : {"id":string,"image":string}[]
 
 }
+The `source` attribute contains an array of spectra files relative paths.
 The `spectra` attribute contains an array of spectra (1D and 2D).
 The `molecules` attribute contains an array of molecules.
 The `version` attribute contains the current version of the data which is crucial for data migration in NMRium
