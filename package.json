@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
+    "postbuild": "node ace swagger:generate",
     "test": "node ace test",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
@@ -55,6 +56,7 @@
   "dependencies": {
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/repl": "^3.1.11",
+    "adonis5-swagger": "^1.4.1",
     "nmr-load-save": "^0.7.27",
     "playwright": "^1.31.1",
     "proxy-addr": "^2.0.7",
