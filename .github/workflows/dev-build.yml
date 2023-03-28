@@ -1,0 +1,95 @@
+
+# This worklflow will perform following actions when the code is pushed to development branch:
+# - Run test using Playwright
+# - Build the latest docker image in development which needs test to pass first.
+# - Push the latest docker image to Google Artifact Registry-Dev.
+# - Rollout the latest image in GKE.
+# 
+# Maintainers:
+#   - name: Nisha Sharma
+#   - email: nisha.sharma@uni-jena.de
+
+name: Build and Deploy to Dev
+
+on:
+  push:
+    branches: [development]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER_DEV: nmrxiv-dev
+  GKE_ZONE: europe-west3-a
+  DEPLOYMENT_NAME: nodejs-nmrxiv-nodejs-microservice
+  REPOSITORY_NAME_DEV: nmrxiv-dev
+  IMAGE: nmrxiv-nodejs-microservice
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: 'Create .env file'
+        run: |
+          touch .env
+          cp .env.example .env
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run test
+        run: npm test
+
+  setup-build-publish-deploy-dev:
+    name: Deploy to dev
+    if: github.ref == 'refs/heads/development'
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Setup gcloud CLI
+      - name: Setup CLI
+        uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+
+      # Configure docker to use the gcloud command-line tool as a credential helper
+      - name: Configure docker
+        run: |-
+          gcloud auth configure-docker europe-west3-docker.pkg.dev
+          
+      # Get the GKE credentials so we can deploy to the cluster
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v0.3.0
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER_DEV }}
+          location: ${{ env.GKE_ZONE }}
+          credentials: ${{ secrets.GKE_SA_KEY }}
+
+      # Build the Docker image
+      - name: Build docker image
+        run: |-
+          docker build --tag europe-west3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME_DEV/$IMAGE:latest .
+
+      # Push the Docker image to Google Artifact Registry
+      - name: Publish Image to Google Artifact Registry
+        run: |-
+          docker push "europe-west3-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME_DEV/$IMAGE:latest"
+
+      # Deploy the latest Docker image to the GKE cluster
+      - name: Deploy
+        run: |-
+          kubectl rollout restart deployment/$DEPLOYMENT_NAME
+          kubectl rollout status deployment/$DEPLOYMENT_NAME --timeout=300s
+          kubectl get services -o wide
