@@ -20,7 +20,7 @@ paths:
                 urls:
                   - >-
                     https://cheminfo.github.io/bruker-data-test/data/zipped/aspirin-1h.zip
-                snapshot: true
+                snapshot: false
       responses:
         '200':
           description: Successful response
