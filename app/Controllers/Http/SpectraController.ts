@@ -2,12 +2,32 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
 import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
-import { readFromWebSource } from 'nmr-load-save'
+import { NmriumState, readFromWebSource, Spectrum } from 'nmr-load-save'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 interface SpectrumSnapshot {
   image: string
   id: string
+}
+
+function omitKeys<T>(source: T, excludeKeys: Array<keyof T>): Partial<T> {
+  const target: Partial<T> = {}
+  for (const key in source) {
+    if (!excludeKeys.includes(key)) {
+      target[key] = source[key]
+    }
+  }
+
+  return target
+}
+
+function resolveState(state: NmriumState) {
+  let { data, version, ...others } = state
+  data.spectra = data?.spectra.map((spectrum) =>
+    omitKeys(spectrum, ['data', 'originalData'])
+  ) as Spectrum[]
+
+  return { data, version, ...others }
 }
 
 export default class SpectraController {
@@ -21,7 +41,8 @@ export default class SpectraController {
       }
       return { relativePath: refURL.pathname, baseURL: refURL.origin }
     }, [])
-    return readFromWebSource({ entries })
+    const state: NmriumState = (await readFromWebSource({ entries })) as NmriumState
+    return resolveState(state)
   }
 
   private generateNMRiumURL() {
@@ -103,6 +124,7 @@ export default class SpectraController {
       })
 
       const { data, version } = await this.loadFilesFromURLs(urls)
+
       const images = snapshot ? await this.getSpectraViewAsBase64(data?.spectra) : null
       response.send({ data: { ...data, version }, images })
     } catch (error) {
