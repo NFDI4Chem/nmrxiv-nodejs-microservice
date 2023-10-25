@@ -1,0 +1,32 @@
+        
+openapi: 3.0.2
+info:
+  title: spectra parser
+  description: Process and convert various data formats (from various manufacturers, JCAMP standard files, or NMReDATA format, Bruker) to NMRium format
+  version: 1.0.0
+servers:
+  - url: https://nodejsdev.nmrxiv.org
+paths:
+  /spectra-parser:
+    post:
+      tags:
+        - parser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                urls:
+                  - >-
+                    https://cheminfo.github.io/bruker-data-test/data/zipped/aspirin-1h.zip
+                snapshot: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                jsonObject:
+                  summary: A sample object
+                  externalValue: 'https://nodejsdev.nmrxiv.org/response-examples/parse-spectra-result.json'
