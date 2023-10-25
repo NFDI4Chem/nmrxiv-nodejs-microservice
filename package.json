@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
+    "postbuild": "node ace swagger:generate",
+    "test": "node ace test",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
@@ -26,6 +28,9 @@
   "eslintIgnore": [
     "build"
   ],
+  "volta": {
+    "node": "20.8.1"
+  },
   "prettier": {
     "trailingComma": "es5",
     "semi": false,
@@ -37,23 +42,26 @@
     "printWidth": 100
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^5.9.3",
+    "@adonisjs/assembler": "^5.9.5",
     "@japa/preset-adonis": "^1.2.0",
-    "@japa/runner": "^2.2.2",
+    "@japa/runner": "^2.5.1",
     "adonis-preset-ts": "^2.1.0",
-    "eslint": "^8.25.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.9.0",
     "eslint-plugin-adonis": "^2.1.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "pino-pretty": "^9.1.1",
-    "prettier": "^2.7.1",
-    "typescript": "~4.6",
-    "youch": "^3.2.2",
-    "youch-terminal": "^2.1.5"
+    "eslint-plugin-prettier": "^5.0.0",
+    "pino-pretty": "^10.2.0",
+    "prettier": "^3.0.0",
+    "typescript": "~5.1",
+    "youch": "^3.2.3",
+    "youch-terminal": "^2.2.2"
   },
   "dependencies": {
-    "@adonisjs/core": "^5.8.8",
+    "@adonisjs/core": "^5.9.0",
     "@adonisjs/repl": "^3.1.11",
+    "adonis5-swagger": "^1.4.1",
+    "nmr-load-save": "^0.22.4",
+    "playwright": "^1.39.0",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"
