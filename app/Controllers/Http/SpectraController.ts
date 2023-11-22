@@ -10,7 +10,7 @@ interface SpectrumSnapshot {
   id: string
 }
 
-function omitKeys<T>(source: T, excludeKeys: Array<keyof T>): Partial<T> {
+function omitKeys<T>(source: T, excludeKeys: Array<keyof T | 'logger' | 'keepSource'>): Partial<T> {
   const target: Partial<T> = {}
   for (const key in source) {
     if (!excludeKeys.includes(key)) {
@@ -24,7 +24,7 @@ function omitKeys<T>(source: T, excludeKeys: Array<keyof T>): Partial<T> {
 function resolveState(state: NmriumState) {
   let { data, version, ...others } = state
   data.spectra = data?.spectra.map((spectrum) =>
-    omitKeys(spectrum, ['data', 'originalData'])
+    omitKeys(spectrum, ['data', 'originalData', 'logger', 'keepSource'])
   ) as Spectrum[]
 
   return { data, version, ...others }
