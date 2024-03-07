@@ -41,15 +41,21 @@ export default class SpectraController {
       }
       return { relativePath: refURL.pathname, baseURL: refURL.origin }
     }, [])
-    const state: NmriumState = (await readFromWebSource({ entries })) as NmriumState
+    const state: NmriumState = (await readFromWebSource(
+      { entries },
+      {
+        onLoadProcessing: { autoProcessing: true },
+        sourceSelector: { general: { dataSelection: 'preferFT' } },
+      }
+    )) as NmriumState
     return resolveState(state)
   }
 
   private generateNMRiumURL() {
     const baseURL =
       Env.get('NODE_ENV') === 'development'
-        ? 'https://nmriumdev.nmrxiv.org'
-        : 'https://nmrium.nmrxiv.org/'
+        ? Env.get('NMRIUM_DEV_URL')
+        : Env.get('NMRIUM_PROD_URL')
 
     const url = new URL(baseURL)
     const preferences = JSON.stringify({
