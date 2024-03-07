@@ -41,7 +41,13 @@ export default class SpectraController {
       }
       return { relativePath: refURL.pathname, baseURL: refURL.origin }
     }, [])
-    const state: NmriumState = (await readFromWebSource({ entries })) as NmriumState
+    const state: NmriumState = (await readFromWebSource(
+      { entries },
+      {
+        onLoadProcessing: { autoProcessing: true },
+        sourceSelector: { general: { dataSelection: 'preferFT' } },
+      }
+    )) as NmriumState
     return resolveState(state)
   }
 
