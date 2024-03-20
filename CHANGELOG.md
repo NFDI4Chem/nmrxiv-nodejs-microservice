@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.2.0...v0.3.0) (2024-03-20)
+
+
+### Features
+
+* update nmr-load-save to version 0.28.0 ([f63ab88](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f63ab8899ba2b93b8d5a920c5a3da00a9ab39a1e))
+
 ## [0.2.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.1.0...v0.2.0) (2024-03-07)
 
 
