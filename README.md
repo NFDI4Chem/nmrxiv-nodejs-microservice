@@ -39,7 +39,23 @@ The `images` attribute contains a list of the images for the spectra which is pr
   ```
 
 > **⚠ WARNING: Data Conversion.**  
-> Data should be converted from a **Typed Array** to a **Array**, without this step the NMRium will not be able to load the spectra. ```version``` object is important for NMRium data migration. 
+> Data should be converted from a **Typed Array** to a **Array**, without this step the NMRium will not be able to load the spectra. ```version``` object is important for NMRium data migration.
+
+## Usage
+
+#### Production
+
+[nodejs.nmrxiv.org](https://nodejs.nmrxiv.org/)
+
+#### Development
+
+[nodejsdev.nmrxiv.org](https://nodejsdev.nmrxiv.org/)
+
+#### Deployment
+https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/wiki/Deployment
+
+#### Helm chart
+https://github.com/NFDI4Chem/repo-helm-charts/tree/main/charts/nmrxiv-nodejs-microservice
 
 ## Maintained by
 This project is developed and maintained by the [NFDI4Chem partners](https://www.nfdi4chem.de/) at the [Friedrich Schiller University](https://www.uni-jena.de/en/) Jena, Germany. 
