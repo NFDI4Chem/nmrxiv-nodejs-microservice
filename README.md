@@ -51,10 +51,10 @@ The `images` attribute contains a list of the images for the spectra which is pr
 
 [nodejsdev.nmrxiv.org](https://nodejsdev.nmrxiv.org/)
 
-#### Deployment
+## Deployment
 https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/wiki/Deployment
 
-#### Helm chart
+## Helm chart
 https://github.com/NFDI4Chem/repo-helm-charts/tree/main/charts/nmrxiv-nodejs-microservice
 
 ## Maintained by
