@@ -2,27 +2,24 @@
 
 ## [0.3.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.2.0...v0.3.0) (2024-03-20)
 
-
 ### Features
 
-* update nmr-load-save to version 0.28.0 ([f63ab88](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f63ab8899ba2b93b8d5a920c5a3da00a9ab39a1e))
+- update nmr-load-save to version 0.28.0 ([f63ab88](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f63ab8899ba2b93b8d5a920c5a3da00a9ab39a1e))
 
 ## [0.2.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.1.0...v0.2.0) (2024-03-07)
 
-
 ### Features
 
-* prefer loading Ft and auto processing fid ([9e0120f](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/9e0120fe334f404b0deda249e4b077ef2f76fea4))
-* update nmr-load-save to version 0.23.11 ([97bbc2d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/97bbc2d4d2a5f31cadcd5ce01d7c1f51df86c716))
-* update nmr-load-save to version 0.23.3 ([b72a7a9](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/b72a7a9446f3e46ea8d79731a747cdb08cffc37a))
-* update nmr-load-save to version 0.23.8 ([4268f51](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/4268f51b62e5f748e75bb17b1f96da735ae46e0c))
-* update nmr-load-save to version 0.27.3 ([cdefe14](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/cdefe1453d0958ad6f539dc4a186f0db91d6c509))
-
+- prefer loading Ft and auto processing fid ([9e0120f](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/9e0120fe334f404b0deda249e4b077ef2f76fea4))
+- update nmr-load-save to version 0.23.11 ([97bbc2d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/97bbc2d4d2a5f31cadcd5ce01d7c1f51df86c716))
+- update nmr-load-save to version 0.23.3 ([b72a7a9](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/b72a7a9446f3e46ea8d79731a747cdb08cffc37a))
+- update nmr-load-save to version 0.23.8 ([4268f51](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/4268f51b62e5f748e75bb17b1f96da735ae46e0c))
+- update nmr-load-save to version 0.27.3 ([cdefe14](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/cdefe1453d0958ad6f539dc4a186f0db91d6c509))
 
 ### Bug Fixes
 
-* move nmrium url to ENV. ([3f32b01](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/3f32b019ec48b958525148bf8acaaa47d8d449f3)), closes [#4](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/issues/4)
-* serialize spectra object ([d5ee2bf](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/d5ee2bfe30b94ca89e88af478594c809d68b3bbc))
+- move nmrium url to ENV. ([3f32b01](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/3f32b019ec48b958525148bf8acaaa47d8d449f3)), closes [#4](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/issues/4)
+- serialize spectra object ([d5ee2bf](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/d5ee2bfe30b94ca89e88af478594c809d68b3bbc))
 
 ## 1.0.0 (2023-10-25)
 
