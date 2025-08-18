@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production node ace build",
     "postbuild": "NODE_ENV=production node ace swagger:generate",
     "dev": "node ace serve --hmr",
-    "test": "node ace test",
+    "test": "NODE_ENV=production node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
