@@ -2,9 +2,15 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
 import Env from '@ioc:Adonis/Core/Env'
 import playwright from 'playwright'
-import { NmriumState, readFromWebSource, Spectrum } from 'nmr-load-save'
+import type {
+  NmriumState,
+  Spectrum
+} from '@zakodium/nmrium-core';
+import init from '@zakodium/nmrium-core-plugins';
 import Logger from '@ioc:Adonis/Core/Logger'
 
+
+const core = init();
 interface SpectrumSnapshot {
   image: string
   id: string
@@ -41,7 +47,7 @@ export default class SpectraController {
       }
       return { relativePath: refURL.pathname, baseURL: refURL.origin }
     }, [])
-    const state: NmriumState = (await readFromWebSource(
+    const state: NmriumState = (await core.readFromWebSource(
       { entries },
       {
         onLoadProcessing: { autoProcessing: true },
