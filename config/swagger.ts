@@ -1,12 +1,16 @@
-import { SwaggerConfig } from '@ioc:Adonis/Addons/Swagger'
+import { SwaggerConfig } from '@dedel.alex/adonis6-swagger/types'
 
 export default {
-  uiEnabled: true, //disable or enable swaggerUi route
-  uiUrl: 'docs', // url path to swaggerUI
-  specEnabled: true, //disable or enable swagger.json route
+  // Disable/Enable swaggerUi route
+  uiEnabled: true,
+  // Url path to swaggerUI
+  uiUrl: 'docs',
+  // Disable/Enable swagger.json route
+  specEnabled: true,
   specUrl: '/swagger.json',
 
-  middleware: [], // middlewares array, for protect your swagger docs and spec endpoints
+  // List of middlewares to protect your swagger docs and spec endpoints
+  middleware: [],
 
   options: {
     definition: {

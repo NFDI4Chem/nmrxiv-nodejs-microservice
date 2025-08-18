@@ -1,16 +1,22 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { rules, schema as Schema } from '@ioc:Adonis/Core/Validator'
-import Env from '@ioc:Adonis/Core/Env'
+import type { HttpContext } from '@adonisjs/core/http'
+import env from '#start/env'
 import playwright from 'playwright'
-import type {
-  NmriumState,
-  Spectrum
-} from '@zakodium/nmrium-core';
-import init from '@zakodium/nmrium-core-plugins';
-import Logger from '@ioc:Adonis/Core/Logger'
+import type { NmriumState, Spectrum } from '@zakodium/nmrium-core'
+import init from '@zakodium/nmrium-core-plugins'
+import logger from '@adonisjs/core/services/logger'
 
+import vine from '@vinejs/vine'
+import { Exception } from '@adonisjs/core/exceptions'
 
-const core = init();
+const validator = vine.compile(
+  vine.object({
+    urls: vine.array(vine.string()),
+    snapshot: vine.boolean().optional(),
+  })
+)
+
+const core = init()
+
 interface SpectrumSnapshot {
   image: string
   id: string
@@ -59,9 +65,15 @@ export default class SpectraController {
 
   private generateNMRiumURL() {
     const baseURL =
-      Env.get('NODE_ENV') === 'development'
-        ? Env.get('NMRIUM_DEV_URL')
-        : Env.get('NMRIUM_PROD_URL')
+      env.get('NODE_ENV') === 'development' ? env.get('NMRIUM_DEV_URL') : env.get('NMRIUM_PROD_URL')
+
+    if (!baseURL) {
+      logger.error('Base URL is not defined')
+      throw new Exception('Base URL is not defined', {
+        status: 400,
+        code: 'BASE_URL_MISSING',
+      })
+    }
 
     const url = new URL(baseURL)
     const preferences = JSON.stringify({
@@ -111,7 +123,7 @@ export default class SpectraController {
           id: spectrum.id,
         })
       } catch (e) {
-        Logger.error(e)
+        logger.error(e)
       }
     }
 
@@ -121,26 +133,19 @@ export default class SpectraController {
     return data
   }
 
-  public async index(context: HttpContextContract) {
+  public async index(context: HttpContext) {
     const { response, request } = context
 
-    //validate parameters
-    const schema = Schema.create({
-      urls: Schema.array().members(Schema.string([rules.url()])),
-      snapshot: Schema.boolean.optional(),
-    })
-
     try {
-      const { urls, snapshot = false } = await request.validate({
-        schema,
-      })
+      const payload = await request.body()
+      const { urls, snapshot = false } = await validator.validate(payload)
 
       const { data, version } = await this.loadFilesFromURLs(urls)
 
       const images = snapshot ? await this.getSpectraViewAsBase64(data?.spectra) : null
       response.send({ data: { ...data, version }, images })
     } catch (error) {
-      Logger.error(error)
+      logger.error(error)
       response.status(400).send(error)
     }
   }
