@@ -17,3 +17,5 @@ jobs:
         run: npx playwright install --with-deps
       - name: Build test application
         run: npm run build --if-present
+      - name: Run test
+        run: npm test
