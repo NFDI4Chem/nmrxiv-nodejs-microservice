@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/server.js",
-    "build": "node ace build",
+    "build": "NODE_ENV=production node ace build",
     "postbuild": "node ace swagger:generate",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
