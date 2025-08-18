@@ -46,24 +46,24 @@
     "@japa/preset-adonis": "^1.2.0",
     "@japa/runner": "^2.5.1",
     "adonis-preset-ts": "^2.1.0",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.9.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-adonis": "^2.1.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "pino-pretty": "^10.2.0",
-    "prettier": "^3.0.0",
-    "typescript": "~5.1",
-    "youch": "^3.2.3",
-    "youch-terminal": "^2.2.2"
+    "eslint-plugin-prettier": "^5.5.4",
+    "pino-pretty": "^13.1.1",
+    "prettier": "^3.6.2",
+    "typescript": "~5.9",
+    "youch": "^3.3.4",
+    "youch-terminal": "^2.2.3"
   },
   "dependencies": {
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/repl": "^3.1.11",
     "adonis5-swagger": "^1.4.1",
     "nmr-load-save": "^0.28.0",
-    "playwright": "^1.39.0",
+    "playwright": "^1.54.2",
     "proxy-addr": "^2.0.7",
-    "reflect-metadata": "^0.1.13",
+    "reflect-metadata": "^0.2.2",
     "source-map-support": "^0.5.21"
   }
 }
