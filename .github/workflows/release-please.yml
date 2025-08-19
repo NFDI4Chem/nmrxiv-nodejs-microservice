@@ -1,14 +1,13 @@
-
 # This worklflow will perform following actions when the code is pushed to main branch.
 # - Run end to end test
 # - Test linting.
 # - Trigger release-please action to create release which needs e2etest & lint to pass first.
-# 
+#
 # Maintainers:
 #   - name: Nisha Sharma
 #   - email: nisha.sharma@uni-jena.de
 
-name: release-please 
+name: release-please
 
 on:
   push:
