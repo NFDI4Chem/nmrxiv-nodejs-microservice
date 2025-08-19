@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.3.0...v0.4.0) (2025-08-19)
+
+
+### Features
+
+* migrate from nmr-load-save to nmrium-core ([6982343](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/6982343c8ae6cdbdf52db0641bda5a8bad4808f6))
+* upgrade framework from AdonisJS v5 to v6 ([3349b08](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/3349b0893b07b112918fb2f4e5a2e0a6c2856fa9))
+
+
+### Bug Fixes
+
+* test workflow link update ([1bbaa4a](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/1bbaa4a46ba07afe2d4bee436d32db4f89a0ca46))
+* update production build workflow ([4f86656](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/4f86656a964958bbfb473f3010dba2ce8f964b60))
+
 ## [0.3.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.2.0...v0.3.0) (2024-03-20)
 
 ### Features
