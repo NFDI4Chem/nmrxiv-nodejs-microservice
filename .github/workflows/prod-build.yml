@@ -20,7 +20,7 @@ env:
 
 jobs:
   e2etest:
-    uses: NFDI4Chem/nmrxiv-nodejs-microservice/.github/workflows/e2e.yml@production
+    uses: NFDI4Chem/nmrxiv-nodejs-microservice/.github/workflows/e2e.yml@development
 
   setup-build-publish-deploy-prod:
     name: Deploy to prod 
