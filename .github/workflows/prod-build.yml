@@ -31,6 +31,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Fetch latest GitHub release
+      - name: Fetch latest release
+        id: fetch-latest-release
+        uses: InsonusK/get-latest-release@v1.0.1
+        with:
+          myToken: ${{ github.token }}
+          exclude_types: "draft"
+          view_top: 10
+
       # Configure docker to use the gcloud command-line tool as a credential helper
       - name: Configure docker
         run: |-
@@ -52,7 +61,7 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: |
-            RELEASE_VERSION=${{ github.event.release.tag_name }}
+            RELEASE_VERSION=${{ steps.fetch-latest-release.outputs.tag_name }}
           tags: |
-            ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:${{ github.event.release.tag_name }}
+            ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:${{ steps.fetch-latest-release.outputs.tag_name }}
             ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:latest
