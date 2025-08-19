@@ -25,4 +25,4 @@ COPY --chown=node:node --from=build /home/node/app/build .
 COPY --chown=node:node --from=build /home/node/app/docs ./docs
 COPY --chown=node:node --from=build /home/node/app/public ./public
 EXPOSE $PORT
-CMD [ "dumb-init", "node", "server.js" ]
+CMD [ "dumb-init", "node", "bin/server.js" ]
