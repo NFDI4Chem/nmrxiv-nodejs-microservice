@@ -9,9 +9,8 @@
 name: Build and Deploy to Prod
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME  }}
