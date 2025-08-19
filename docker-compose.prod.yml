@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  adonis_app:
+    container_name: nmrxiv-nodejs-microservice
+    restart: always
+    image: nfdi4chem/nodejs-microservice:latest
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    environment:
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - NO_PROXY=${NO_PROXY}
+    command: dumb-init node server.js
