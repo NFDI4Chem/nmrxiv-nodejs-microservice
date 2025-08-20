@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.5.0...v0.5.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* modify trigger point to check for tags ([ce171f4](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/ce171f48916a9dc6e2206ae0cddfa8bd92193131))
+* modify trigger point to check for tags ([a69dbc1](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/a69dbc1c29b91cf6da7acc86d559e24c5fd79aac))
+
 ## [0.5.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.4.0...v0.5.0) (2025-08-20)
 
 
