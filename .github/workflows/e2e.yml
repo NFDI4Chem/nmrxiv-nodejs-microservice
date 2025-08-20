@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          node-version: '18' # fallback if not found in package.json
+          node-version: '20' # fallback if not found in package.json
       - name: 'Create .env file'
         run: |
             touch .env
