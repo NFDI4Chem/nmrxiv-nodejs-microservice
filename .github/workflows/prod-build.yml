@@ -9,9 +9,8 @@
 name: Build and Deploy to Prod
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME  }}
@@ -65,4 +64,3 @@ jobs:
           tags: |
             ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:${{ steps.fetch-latest-release.outputs.tag_name }}
             ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:latest
-
