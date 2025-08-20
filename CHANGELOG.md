@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## [0.7.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.6.0...v0.7.0) (2025-08-20)
 
 
@@ -76,6 +77,8 @@
 * use Github Token to create release ([6cbc807](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/6cbc807c11745f3e34a3182e0c3bade33d5756cd))
 * use Github Token to create release ([8db79dd](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/8db79ddb124edcadb9d37f99d41b9c12095a651f))
 
+=======
+>>>>>>> 2447769 (chore(main): release 0.6.0)
 ## [0.6.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.5.1...v0.6.0) (2025-08-20)
 
 

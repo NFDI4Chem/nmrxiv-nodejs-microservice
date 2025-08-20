@@ -1,6 +1,10 @@
 {
   "name": "nmrxiv-nodejs-microservice",
+<<<<<<< HEAD
   "version": "0.7.0",
+=======
+  "version": "0.6.0",
+>>>>>>> 2447769 (chore(main): release 0.6.0)
   "private": true,
   "type": "module",
   "license": "MIT",
