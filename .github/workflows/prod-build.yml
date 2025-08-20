@@ -34,7 +34,7 @@ jobs:
       # Fetch latest GitHub release
       - name: Fetch latest release
         id: fetch-latest-release
-        uses: InsonusK/get-latest-release@v1.0.1
+        uses: InsonusK/get-latest-release@v1.1.0
         with:
           myToken: ${{ github.token }}
           exclude_types: "draft"
@@ -65,3 +65,4 @@ jobs:
           tags: |
             ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:${{ steps.fetch-latest-release.outputs.tag_name }}
             ${{ env.REPOSITORY_NAMESPACE }}/${{ env.REPOSITORY_NAME }}:latest
+
