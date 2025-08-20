@@ -7,7 +7,7 @@
 #   - name: Nisha Sharma
 #   - email: nisha.sharma@uni-jena.de
 
-name: release-please-action
+name: release-please
 
 on:
   push:
@@ -15,12 +15,14 @@ on:
       - main
 
 jobs:
+  e2etest:
+    uses: NFDI4Chem/nmrxiv-nodejs-microservice/.github/workflows/e2e.yml@development
+
   release-please:
     runs-on: ubuntu-latest
+    needs: e2etest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         with:
           release-type: node
-          package-name: release-please-action
-          token: ${{ secrets.PAT }}
-          prerelease: true
+          token: ${{ secrets.PAT}}
