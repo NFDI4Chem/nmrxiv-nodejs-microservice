@@ -1,4 +1,7 @@
 # API Service To Process Spectra from various data formats to NMRium format
+[![Build and Deploy to Prod](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/actions/workflows/prod-build.yml/badge.svg)](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/actions/workflows/prod-build.yml)
+
+[![release-please](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/actions/workflows/release-please.yml/badge.svg)](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/actions/workflows/release-please.yml)
 
 The API uses the [nmr-load-save](https://github.com/cheminfo/nmr-load-save) package to process the spectra and [playwright](https://playwright.dev/) to load the NMRium from the deployed wrapper [nmrium-react-wrapper](https://github.com/NFDI4Chem/nmrium-react-wrapper) and import the generated data to get the snapshots. 
 
