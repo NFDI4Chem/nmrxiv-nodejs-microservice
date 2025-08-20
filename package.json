@@ -48,7 +48,6 @@
     "eslint": "^9.26.0",
     "hot-hook": "^0.4.0",
     "pino-pretty": "^13.0.0",
-    "playwright": "^1.54.2",
     "prettier": "^3.5.3",
     "ts-node-maintained": "^10.9.5",
     "typescript": "~5.8"
@@ -60,6 +59,7 @@
     "@adonisjs/lucid": "^21.6.1",
     "@dedel.alex/adonis6-swagger": "^0.0.16",
     "@vinejs/vine": "^3.0.1",
+    "playwright": "^1.55.0",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
