@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.5.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.4.0...v0.5.0) (2025-08-20)
+
+
+### Features
+
+* add deploy script for automated deployment ([2dec63b](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/2dec63bc453fd47b4243f0628433ce1933ad79f9))
+
+
+### Bug Fixes
+
+* resolve all warnings in github workflows ([e8bf151](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/e8bf1514ff9cecc712c2cd2abd2f54192ba5ed6f))
+* update dockerfile to fix node build ([c928d8e](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/c928d8ed05135909f2aa1469d260b1d95a65cd58))
+* update README ([6c67ef6](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/6c67ef6fda532763803331c17fc5f3d9617fd124))
+* update README ([2726fd9](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/2726fd9f2fdeeb210dca16aa9e602c49d62a3664))
+* update release tag ([f5a802d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f5a802d155913a48cb7a54bdf5400360b94d6a7f))
+* update release tag ([86c450f](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/86c450f7452aa9ecc2c061c839b43dc1c3d5df2c))
+* update release trigger ([51e7171](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/51e7171247ad64a02993351ca610f45d4ef4d3da))
+* update release trigger ([6aa7fbd](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/6aa7fbdaca03e16b675fcd794a520a2216763152))
+
 ## [0.4.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.3.0...v0.4.0) (2025-08-19)
 
 
