@@ -45,7 +45,7 @@ function resolveState(state: NmriumState) {
 export default class SpectraController {
   private async loadFilesFromURLs(urls: string[]) {
     const entries = urls.map((url) => {
-      const refURL = new URL(url)
+      const refURL = new URL(decodeURIComponent(url))
       let name = url.substring(url.lastIndexOf('/') + 1)
       const hasExtension = name && name.indexOf('.') !== -1
       if (!hasExtension) {
