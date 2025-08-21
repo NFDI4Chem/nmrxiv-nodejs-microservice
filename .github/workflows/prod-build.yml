@@ -8,14 +8,14 @@
 
 name: Build and Deploy to Prod
 
-# on:
-#   release:
-#     types: [published,created]
-
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published,created]
+
+# on:
+#   push:
+#     branches:
+#       - main
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME  }}
