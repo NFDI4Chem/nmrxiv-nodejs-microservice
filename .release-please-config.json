@@ -1,0 +1,11 @@
+{
+  "bootstrap-sha": "13dd22aef68b8424f740b4299067a9bf0baa23a4",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "nmrxiv-nodejs-microservice",
+      "include-component-in-tag": false,
+      "include-v-in-tag": true
+    }
+  }
+}
