@@ -1,5 +1,50 @@
 # Changelog
 
+## [0.8.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.7.0...v0.8.0) (2025-09-02)
+
+
+### Features
+
+* enable experimental feature for auto-processing in 2D ([e3555c2](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/e3555c2cc97a8a1956c0ef263a9b8fb4c6c9739d))
+* update trigger point to allow prod build to run manually. ([9834c15](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/9834c15b827a1cfd7fa3fad8737914d9246f17ab))
+* update trigger point to allow prod build to run manually. ([507d3dd](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/507d3dd1431d8e99e1bb44f631a83425877f8ddd))
+
+
+### Bug Fixes
+
+* add alternate release-please workflow ([2450d72](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/2450d720eeee460dad44dfacdf863f319a4bfa1e))
+* add alternate release-please workflow ([2450d72](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/2450d720eeee460dad44dfacdf863f319a4bfa1e))
+* add alternate release-please workflow ([14f679b](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/14f679b9e103da62ae44b7f8c210ec70e06100bf))
+* add config files to release please. ([b3326b6](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/b3326b662db5f1c3ac64f18b32a4d8b2995eba30))
+* decode URLs before passing to URL constructor ([d958d81](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/d958d816e52e6df61320815e7ceb52f7f7114e9a))
+* improve prod build workflow ([44dd370](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/44dd3709df46fac0243cd580abfff3b4c7c0453b))
+* json format issue in config.json ([ff5c6cb](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/ff5c6cb6cfba44def5e4571ae9eb6efd3b35a629))
+* json format issue in config.json ([ff5c6cb](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/ff5c6cb6cfba44def5e4571ae9eb6efd3b35a629))
+* json format issue in config.json ([f6947c2](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f6947c2220af03baadff2bcf4a6d5ecec9463ddf))
+* release please issue ([e3634e1](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/e3634e17d6292bb436ad7c4eea5fae9959036359))
+* release please issue ([e3634e1](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/e3634e17d6292bb436ad7c4eea5fae9959036359))
+* release please issue ([8269a9a](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/8269a9a36180eb22d941ba15dd304619c8ca969c))
+* release please issue ([5c8b885](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/5c8b88560cd15b5c3b5bf8b6ea69d9a0cfc2aeff))
+* release-please issue ([56cbd0d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/56cbd0d2c6eb4f934b47a9693c63343d7b8ad965))
+* release-please issue ([d2dae66](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/d2dae6632a2cc43992b1e890d3c970e97a37fa20))
+* revert to older version of release-please ([8b7a350](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/8b7a3507164219b5ed40ebbbdf19148e22c6293a))
+* revert to older version of release-please ([32db3d7](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/32db3d7eca792a68668ccd14aec97473ed7262cd))
+* update allowed users list in prod build workflow ([fa7ddd5](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/fa7ddd5a33438dd077d8901806e751aa96ef4458))
+* use the Github PAT token ([e76cac1](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/e76cac1608a05ca5ae2024e235041452b6f38508))
+* use the Github PAT token ([#73](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/issues/73)) ([9a35943](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/9a35943bd06f187cba2fbb364a6f37e8c0b3878f))
+
+
+### Miscellaneous
+
+* **main:** release 0.5.0 ([825ff1d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/825ff1db4e5251d3c443c8c017d3470c144522af))
+* **main:** release 0.5.1 ([b37b2a2](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/b37b2a2028a32c4c8fb7e2bb5a92e5a10299b286))
+* **main:** release 0.6.0 ([f89dcac](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f89dcacc4575503fdcdcdfb9650fd59aa8984bdd))
+* **main:** release 0.6.0 ([b671b7d](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/b671b7d5b66e18743dcaf012e9261b54cdf1033f))
+* **main:** release 0.7.0 ([f6d52c6](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/f6d52c677f9883fe4edd1cf1aeccf7f93231b2a0))
+* **main:** release 0.7.0 ([7dd20aa](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/7dd20aa626027d4a53b55aae10ce099380a5405b))
+* move [@dedel](https://github.com/dedel).alex/adonis6-swagger from dev depenencies to regular dependencies ([0e99243](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/0e992433cb158d89e7f4c087486fff146a6448f2))
+* update node image version ([2ae2f96](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/commit/2ae2f963d3bb257c0b5a89365457e476bdf484c7))
+
 ## [0.7.0](https://github.com/NFDI4Chem/nmrxiv-nodejs-microservice/compare/v0.6.0...v0.7.0) (2025-08-20)
 
 
