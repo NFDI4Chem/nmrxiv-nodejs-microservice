@@ -1,0 +1,25 @@
+# Alternative Minimal Release-Please Workflow
+# Replace your current workflow with this if the configuration files don't work
+
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  e2etest:
+    uses: NFDI4Chem/nmrxiv-nodejs-microservice/.github/workflows/e2e.yml@development
+
+  release-please:
+    runs-on: ubuntu-latest
+    needs: e2etest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: nmrxiv-nodejs-microservice
+          token: ${{ secrets.PAT}}
+          # Only look at commits since last tag to avoid parsing old history
+          changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
