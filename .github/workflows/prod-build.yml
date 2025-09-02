@@ -39,9 +39,13 @@ jobs:
 
           # Allowed users who can trigger production deploys
           # Add more GitHub usernames separated by spaces
-          ALLOWED_USERS=" sharmanis14 hamed-musallam vcnainala "
+          ALLOWED_USERS=" sharmanis14 hamed-musallam vcnainala NishaSharma14 "
 
-          if [[ "${ALLOWED_USERS}" != *" ${GITHUB_ACTOR} "* ]]; then
+          # Case-insensitive membership check
+          ALLOWED_USERS_LOWER=" ${ALLOWED_USERS,,} "
+          ACTOR_LOWER="${GITHUB_ACTOR,,}"
+
+          if [[ "${ALLOWED_USERS_LOWER}" != *" ${ACTOR_LOWER} "* ]]; then
             echo "User '${GITHUB_ACTOR}' is not authorized to trigger this workflow."
             exit 1
           fi
