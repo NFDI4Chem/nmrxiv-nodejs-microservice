@@ -1,0 +1,34 @@
+# Alternative Clean Slate Workflow
+# Use this if the bootstrap approach still fails
+
+name: release-please-alternative
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  e2etest:
+    uses: NFDI4Chem/nmrxiv-nodejs-microservice/.github/workflows/e2e.yml@development
+
+  release-please:
+    runs-on: ubuntu-latest
+    needs: e2etest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+          token: ${{ secrets.PAT}}
+          # Start fresh - only look at recent commits
+          command: manifest-pr
+      - name: Manual version bump if release-please fails
+        if: failure()
+        run: |
+          echo "Release-please failed. Consider manual version management."
+          echo "Current version should be bumped from 0.7.0 based on conventional commits since last release."
