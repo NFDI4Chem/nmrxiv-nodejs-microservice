@@ -30,6 +30,6 @@ jobs:
         with:
           release-type: node
           package-name: nmrxiv-nodejs-microservice
-          token: ${{ secrets.PAT}}
+          token: ${{ secrets.GITHUB_TOKEN }}
           default-branch: main
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false},{"type":"docs","section":"Documentation","hidden":false},{"type":"ci","section":"CI/CD","hidden":false},{"type":"build","section":"Build","hidden":false},{"type":"refactor","section":"Refactoring","hidden":false}]'
