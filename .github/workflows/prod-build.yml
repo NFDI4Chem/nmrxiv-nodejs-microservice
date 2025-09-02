@@ -39,7 +39,7 @@ jobs:
 
           # Allowed users who can trigger production deploys
           # Add more GitHub usernames separated by spaces
-          ALLOWED_USERS=" sharmanis14 hamed-musallam vcnainala NishaSharma14 "
+          ALLOWED_USERS=" hamed-musallam vcnainala NishaSharma14 "
 
           # Case-insensitive membership check
           ALLOWED_USERS_LOWER=" ${ALLOWED_USERS,,} "
