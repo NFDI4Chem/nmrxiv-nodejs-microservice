@@ -58,6 +58,7 @@ export default class SpectraController {
       {
         onLoadProcessing: { autoProcessing: true },
         sourceSelector: { general: { dataSelection: 'preferFT' } },
+        experimentalFeatures: true
       }
     )) as NmriumState
     return resolveState(state)
