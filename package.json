@@ -57,8 +57,8 @@
     "@adonisjs/lucid": "^21.8.0",
     "@dedel.alex/adonis6-swagger": "^0.0.16",
     "@vinejs/vine": "^3.0.1",
-    "@zakodium/nmrium-core": "^0.1.6",
-    "@zakodium/nmrium-core-plugins": "^0.1.9",
+    "@zakodium/nmrium-core": "^0.1.7",
+    "@zakodium/nmrium-core-plugins": "^0.1.10",
     "playwright": "^1.55.0",
     "reflect-metadata": "^0.2.2"
   },
