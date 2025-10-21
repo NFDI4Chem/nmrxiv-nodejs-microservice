@@ -1,12 +1,18 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import env from '#start/env'
 import playwright from 'playwright'
-import type { NmriumState, Spectrum } from '@zakodium/nmrium-core'
+import type { NmriumState, ParsingOptions, Spectrum } from '@zakodium/nmrium-core'
 import init from '@zakodium/nmrium-core-plugins'
 import logger from '@adonisjs/core/services/logger'
 
 import vine from '@vinejs/vine'
 import { Exception } from '@adonisjs/core/exceptions'
+
+const PARSING_OPTIONS: Partial<ParsingOptions> = {
+  onLoadProcessing: { autoProcessing: true },
+  experimentalFeatures: true,
+  selector: { general: { dataSelection: 'preferFT' } },
+}
 
 const validator = vine.compile(
   vine.object({
@@ -34,6 +40,7 @@ function omitKeys<T>(source: T, excludeKeys: Array<keyof T>): Partial<T> {
 }
 
 function resolveState(state: NmriumState) {
+  console.log(state)
   let { data, version, ...others } = state
   data.spectra = data?.spectra.map((spectrum) =>
     omitKeys(spectrum, ['data', 'originalData'])
@@ -42,26 +49,24 @@ function resolveState(state: NmriumState) {
   return { data, version, ...others }
 }
 
+function getFileNameFromURL(url: string) {
+  return url.slice(Math.max(0, url.lastIndexOf('/') + 1))
+}
+
 export default class SpectraController {
   private async loadFilesFromURLs(urls: string[]) {
     const entries = urls.map((url) => {
-      const refURL = new URL(decodeURIComponent(url))
-      let name = url.substring(url.lastIndexOf('/') + 1)
-      const hasExtension = name && name.indexOf('.') !== -1
+      const refURL = new URL(url)
+      const name = getFileNameFromURL(url)
+      let path = refURL.pathname
+      const hasExtension = name?.includes('.')
       if (!hasExtension) {
-        name = `${name}.zip`
+        path = `${path}.zip`
       }
-      return { relativePath: refURL.pathname, baseURL: refURL.origin }
+      return { relativePath: path, baseURL: refURL.origin }
     }, [])
-    const state: NmriumState = (await core.readFromWebSource(
-      { entries },
-      {
-        onLoadProcessing: { autoProcessing: true },
-        sourceSelector: { general: { dataSelection: 'preferFT' } },
-        experimentalFeatures: true
-      }
-    )) as NmriumState
-    return resolveState(state)
+    const [state] = await core.readFromWebSource({ entries }, PARSING_OPTIONS)
+    return resolveState(state as NmriumState)
   }
 
   private generateNMRiumURL() {
